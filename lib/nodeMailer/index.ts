@@ -1,7 +1,7 @@
 "use server";
 
 import { EmailContent, EmailProductInfo, NotificationType } from "@/types";
-import nodemailer from "nodemailer";
+import nodemailer, { TransportOptions } from "nodemailer";
 
 const Notification = {
   WELCOME: "WELCOME",
@@ -80,7 +80,7 @@ export const generateEmailBody = async (
   return { subject, body };
 };
 
-const transporter = nodemailer.createTransport({
+const transporter = (nodemailer as any).createTransport({
   pool: true,
   service: "hotmail",
   port: 2525,
